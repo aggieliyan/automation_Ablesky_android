@@ -16,3 +16,6 @@ def open_login_page_by_click_login_or_register_text(driver,cfg):
     personalpage = Personal(driver,cfg)
     personalpage.click_login_or_register()
     
+def open_setting_page(driver,cfg):
+    personalpage = Personal(driver,cfg)
+    personalpage.click_setting()

@@ -6,6 +6,8 @@ import time
 import home
 from PO.index_page import Index
 import personal
+from PO.personal_page import Personal
+from PO.setting_page import Setting
 
 def click_back_btn(driver,cfg):
     loginpage = Login(driver, cfg)
@@ -34,6 +36,7 @@ def login_by_mobile(cfg, driver, mobile_num, mobile_pwd):
     loginpage = Login(driver, cfg)
     loginpage.input_username(mobile_num)
     loginpage.input_pwd(mobile_pwd)
+    driver.press_keycode(4)
     time.sleep(2)
     
     loginpage.click_login_btn()
@@ -44,9 +47,9 @@ def login_by_username(cfg, driver, username_num, username_pwd):
     open_login_page(driver,cfg)
     loginpage = Login(driver, cfg)
     loginpage.input_username(username_num)
-    loginpage.input_pwd(username_pwd)
+    loginpage.input_pwd(username_pwd)  
+    driver.press_keycode(4)
     time.sleep(2)
-    
     loginpage.click_login_btn()
     print u'登录成功'
     time.sleep(2)
@@ -57,7 +60,16 @@ def login_by_email(cfg, driver, email_num, email_pwd):
     loginpage = Login(driver, cfg)
     loginpage.input_username(email_num)
     loginpage.input_pwd(email_pwd)
+    driver.press_keycode(4)
+    time.sleep(2)
     loginpage.click_login_btn()
     time.sleep(2)
+    
+def logout_by_exit_btn(driver,cfg):
+    personal.open_setting_page(driver, cfg)
+    
+    settingpage = Setting(driver, cfg)
+    settingpage.click_logout_btn()
+    
     
 

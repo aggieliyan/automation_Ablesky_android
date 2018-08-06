@@ -45,21 +45,19 @@ class LoginTest(unittest.TestCase):
      
     def test_loginby_username(self):
         login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
-        # login.logout_by_exit_btn(self.driver, self.cfg)
-        #login.logout_by_switchaccount_btn(self.driver, self.cfg)  
+        login.logout_by_exit_btn(self.driver, self.cfg)
+        
     @unittest.skip('test')  
     def test_loginby_mobile(self):
         login.login_by_mobile(self.cfg, self.driver, self.mobile_num, self.mobile_pwd)
         time.sleep(3)
         #login.logout_by_exit_btn(self.driver, self.cfg)
-        #login.logout_by_switchaccount_btn(self.driver, self.cfg)
     
     @unittest.skip('test')  
     def test_loginby_email(self):
         login.login_by_email(self.cfg, self.driver, self.email_num, self.email_pwd)
         time.sleep(3)
         #login.logout_by_exit_btn(self.driver, self.cfg)
-        #login.logout_by_switchaccount_btn(self.driver, self.cfg)
       
     
     def tearDown(self):
