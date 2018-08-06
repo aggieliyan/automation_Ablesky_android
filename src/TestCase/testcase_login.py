@@ -16,12 +16,9 @@ class LoginTest(unittest.TestCase):
 
     def setUp(self):
         
-        #cfgfile = "E:\workspace\TestNetSchool\src\config\config.ini"
         cfgfile = "..\config\config.ini"
         self.cfg = ConfigParser.ConfigParser()
-        '''
-        self.cfg.read('E:\workspace\TestNetSchool\src\config\config.ini')
-        '''
+        
         self.cfg.readfp(codecs.open(cfgfile, "r", "gb2312"))
         
         desired_caps = {}

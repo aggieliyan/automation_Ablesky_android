@@ -7,6 +7,15 @@ import home
 from PO.index_page import Index
 import personal
 
+def click_back_btn(driver,cfg):
+    loginpage = Login(driver, cfg)
+    loginpage.click_back_btn()
+
+def get_login_page_title(driver,cfg):
+    loginpage = Login(driver, cfg)
+    title = loginpage.get_page_title()
+    return title
+
 def open_login_page(driver,cfg):
     print u'首页有广告关闭广告后进入个人中心,否则pass'
     try:

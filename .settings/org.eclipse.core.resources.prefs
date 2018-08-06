@@ -8,3 +8,4 @@ encoding//src/TestCase/home.py=UTF-8
 encoding//src/TestCase/login.py=UTF-8
 encoding//src/TestCase/personal.py=UTF-8
 encoding//src/TestCase/testcase_login.py=UTF-8
+encoding//src/TestCase/testcase_unlogin.py=UTF-8
