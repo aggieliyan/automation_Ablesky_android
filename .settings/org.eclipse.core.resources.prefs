@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/PO/base.py=UTF-8
+encoding//src/PO/home_page.py=UTF-8
+encoding//src/PO/index_page.py=UTF-8
+encoding//src/PO/login_page.py=UTF-8
+encoding//src/PO/personal_page.py=UTF-8
+encoding//src/TestCase/home.py=UTF-8
+encoding//src/TestCase/login.py=UTF-8
+encoding//src/TestCase/personal.py=UTF-8
+encoding//src/TestCase/testcase_login.py=UTF-8
