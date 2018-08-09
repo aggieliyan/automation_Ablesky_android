@@ -44,7 +44,10 @@ class UnLoginTest(unittest.TestCase):
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)
         
-    #未登录情况下点击个人中心的快速入口                                  
+        ctxlist = self.driver.contexts
+        print ctxlist
+    #未登录情况下点击个人中心的快速入口  
+    @unittest.skip("test")                      
     def test_click_the_quick_entry_of_the_personal_center_without_loggin_in(self):
         print u'首页有广告先关闭广告，否则直接点击我的进入个人中心'
         try:
@@ -131,6 +134,32 @@ class UnLoginTest(unittest.TestCase):
         try:
             title = login.get_login_page_title(self.driver,self.cfg)
             self.assertEqual(title, u'登录', u'未登录情况下点击分享收益进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+    #未登录情况下点击个人中心的快速入口                                  
+    def test_switch_bottom_tabbar_without_loggin_in(self):
+        try:
+            print u'首页有广告先关闭广告'
+            home.close_the_suspended_advertisement(self.driver,self.cfg)
+        except:
+            pass
+        index = Index(self.driver,self.cfg)
+        print u"切换到能力圈"
+        index.click_tab_circle_btn()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击能力圈进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u"切换到交流"
+        index.click_tab_communicate_btn()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击交流进入登录页面失败')
             login.click_back_btn(self.driver,self.cfg)
         except Exception,e:
             print e
