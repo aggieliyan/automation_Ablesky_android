@@ -68,10 +68,10 @@ def download_all_courseware(driver,cfg):
 def get_course_title(driver,cfg,coursetype):
     coursedetail = CourseDetailPage(driver,cfg)
     time.sleep(2)
-    if "face" == coursetype:
-        coursedetail.click_first_tab()
-    else:
+    if "live" == coursetype:
         coursedetail.click_second_tab()
+    else:
+        coursedetail.click_first_tab()
     title = coursedetail.get_course_title()
     return title
 

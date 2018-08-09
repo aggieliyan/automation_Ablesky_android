@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 
 from PO.base import Base
-import time
 
 
 class Personal(Base):
@@ -9,7 +8,11 @@ class Personal(Base):
     def __init__(self, driver, cfg):
         self.cfg = cfg
         self.dr = driver
-    
+        
+    def get_username_text(self):
+        username = self.dr.find_element(self.cfg.get('personal_page', 'personal_page_username_by'), \
+                             self.cfg.get('personal_page', 'personal_page_username')).text
+        return username    
     #未登录状态点击下头像
     def click_unlogin_photo(self):
         self.dr.find_element(self.cfg.get('personal_page', 'personal_page_unlogin_photo_by'), \

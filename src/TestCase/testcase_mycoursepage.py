@@ -61,55 +61,61 @@ class MyCoursePageTest(unittest.TestCase):
         
         self.personal = Personal(self.driver, self.cfg)
         self.personal.click_my_course()
-    '''    
+        
+         
     #从我的课程点击进入点播课程详情页
+    @unittest.skip('test')
     def test_open_dianbo_coursedetail(self):
         openflag = mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开点播课程失败")
     
     #从我的课程点击进入预售班课程详情页
+    @unittest.skip('test')
     def test_open_presell_coursedetail(self):
         openflag = mycourse.click_my_course_page_presell_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开预售班课程失败")
         
     #从我的课程点击进入网络班课程详情页
+    @unittest.skip('test')
     def test_open_network_coursedetail(self):
         openflag = mycourse.click_my_course_page_network_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开网络班课程失败")
        
     #从我的课程点击进入面授班课程详情页
+    @unittest.skip('test')
     def test_open_face_coursedetail(self):
         openflag = mycourse.click_my_course_page_face_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开面授班课程失败")
         
     #从我的课程点击进入直播课程详情页
+    @unittest.skip('test')
     def test_open_live_coursedetail(self):
         openflag = mycourse.click_my_course_page_live_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开直播课程失败")
     
     #从我的课程点击进入考试卷开始答题页
+    @unittest.skip('test')
     def test_open_examination(self):
         openflag = mycourse.click_my_course_page_examination_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开考试卷失败")
-    '''
+    
     
     #从我的课程点击进入练习卷开始答题页
+    @unittest.skip('test')
     def test_open_exercise(self):
         openflag = mycourse.click_my_course_page_exercise_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开练习卷失败")
-        time.sleep(2)
-        mycourse.click_back_btn(self.driver, self.cfg)
         
-        login.logout_by_exit_btn(self.driver, self.cfg)
-    '''
     #从我的课程点击进入题库开始答题页
     def test_open_question_bank(self):
         openflag = mycourse.click_my_course_page_question_bank_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开题库失败")
-    '''
+
     def tearDown(self):
+        time.sleep(2)
+        mycourse.click_back_btn(self.driver, self.cfg)
         
-        
+        login.logout_by_exit_btn(self.driver, self.cfg)
         self.driver.quit()
         
         

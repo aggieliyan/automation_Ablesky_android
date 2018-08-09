@@ -26,4 +26,9 @@ class ExamStartPage(Base):
                               self.cfg.get('exam_start_page', 'exam_start_page_title'))
         return titles[1].text
     
+    def get_question_bank_title(self):
+        title = self.dr.find_element(self.cfg.get('question_bank_page', 'question_bank_page_title_by'), \
+                              self.cfg.get('question_bank_page', 'question_bank_page_title'))
+        return title.text
+    
     

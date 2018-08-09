@@ -21,6 +21,9 @@ except ImportError:
 
 import codecs
 
+'''
+未登录情况下的testcase
+'''
 class UnLoginTest(unittest.TestCase):
 
     def setUp(self):

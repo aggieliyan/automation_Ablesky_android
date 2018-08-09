@@ -26,6 +26,10 @@ def open_login_page(driver,cfg):
         pass
     index = Index(driver,cfg)
     index.click_tab_myself_btn()
+    print u'检查是否已登录'
+    username = personal.get_username_text(driver, cfg)
+    if '登录/注册' != username:
+        logout_by_exit_btn(driver,cfg)
     print u'点击登录/注册进入登录页面'
     personal.open_login_page_by_click_login_or_register_text(driver, cfg)
     

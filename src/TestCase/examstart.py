@@ -18,3 +18,8 @@ def get_exam_title(driver,cfg):
     examstart = ExamStartPage(driver,cfg)
     title = examstart.get_exam_title()
     return title
+
+def get_question_bank_title(driver,cfg):
+    examstart = ExamStartPage(driver,cfg)
+    title = examstart.get_question_bank_title()
+    return title
