@@ -21,8 +21,6 @@ class CourseDetailPage(Base):
                               self.cfg.get('course_detail_page', 'course_detail_page_back_btn')).click()
     
     
-    
-    
     def click_collect_icon(self):
         time.sleep(2)
         self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_collect_icon_by'), \
@@ -112,3 +110,51 @@ class CourseDetailPage(Base):
         time.sleep(2)
         self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_cancel_download_by'), \
                               self.cfg.get('course_detail_page', 'course_detail_cancel_download')).click()
+
+    def click_org_info(self):
+        time.sleep(2)
+        self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_org_layout_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_org_layout')).click()
+    
+    def get_org_follow_text(self):
+        time.sleep(2)
+        element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_org_follow_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_org_follow'))
+        return element.text
+    
+    def click_org_follow(self):
+        time.sleep(2)
+        self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_org_follow_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_org_follow')).click()
+    
+    def get_course_tag_text(self):
+        time.sleep(2)
+        element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_tag_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_tag'))
+        return element.text
+    
+    def click_course_tag(self):
+        time.sleep(2)
+        self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_tag_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_tag')).click()
+    
+    def get_teacher_list(self):
+        time.sleep(2)
+        teachersElement = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_teachers_layout_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_teachers_layout'))
+        teacherslist = teachersElement.find_elements(self.cfg.get('course_detail_page', 'course_detail_teachers_layout_item_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_teachers_layout_item'))
+        return teacherslist
+    
+    def get_teacher_name_list(self):
+        time.sleep(2)
+        teacherNameList = self.dr.find_elements(self.cfg.get('course_detail_page', 'course_detail_teacher_name_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_teacher_name'))
+        return teacherNameList
+    
+    def get_org_name(self):
+        time.sleep(2)
+        element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_org_name_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_org_name'))
+        return element.text
+        

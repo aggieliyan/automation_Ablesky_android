@@ -47,13 +47,20 @@ class Base():
         y = self.dr.get_window_size()['height']    
         return (x, y)     
     
-    def swipeUp(self, t):
+    def swipeUp(self,startY,endY,t):
+        l = self.getSize()
+        x1 = int(l[0] * 0.5)
+        y1 = int(l[1] * startY)
+        y2 = int(l[1] * endY)
+        self.dr.swipe(x1, y1, x1, y2, t)
+        
+    def swipeUpLittle(self, t):
         l = self.getSize()
         x1 = int(l[0] * 0.5)
         y1 = int(l[1] * 0.75)
-        y2 = int(l[1] * 0.25)
+        y2 = int(l[1] * 0.5)
         self.dr.swipe(x1, y1, x1, y2, t)
-        
+      
     def swipDown(self, t):
         l = self.getSize()
         x1 = int(l[0] * 0.5)

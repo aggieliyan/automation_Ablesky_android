@@ -24,6 +24,8 @@ except ImportError:
     import ConfigParser
 
 import codecs
+import coursedetail
+import examstart
 
 class MyCoursePageTest(unittest.TestCase):
 
@@ -41,9 +43,9 @@ class MyCoursePageTest(unittest.TestCase):
         desired_caps['appPackage'] = self.cfg.get('env_para', 'appPackage')
         desired_caps['appActivity'] = self.cfg.get('env_para', 'appActivity')
         desired_caps['deviceName'] = self.cfg.get('env_para', 'deviceName')
-        desired_caps['unicodeKeyboard'] = self.cfg.get('env_para', 'deviceName')
-        desired_caps['resetKeyboard'] = self.cfg.get('env_para', 'unicodeKeyboard')
-        desired_caps['automationName'] = self.cfg.get('env_para','resetKeyboard')
+        desired_caps['unicodeKeyboard'] = self.cfg.get('env_para', 'unicodeKeyboard')
+        desired_caps['resetKeyboard'] = self.cfg.get('env_para', 'resetKeyboard')
+        
         
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)
@@ -68,36 +70,42 @@ class MyCoursePageTest(unittest.TestCase):
     def test_open_dianbo_coursedetail(self):
         openflag = mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开点播课程失败")
+        coursedetail.click_back_btn(self.driver, self.cfg)
     
     #从我的课程点击进入预售班课程详情页
     @unittest.skip('test')
     def test_open_presell_coursedetail(self):
         openflag = mycourse.click_my_course_page_presell_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开预售班课程失败")
+        coursedetail.click_back_btn(self.driver, self.cfg)
         
     #从我的课程点击进入网络班课程详情页
     @unittest.skip('test')
     def test_open_network_coursedetail(self):
         openflag = mycourse.click_my_course_page_network_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开网络班课程失败")
+        coursedetail.click_back_btn(self.driver, self.cfg)
        
     #从我的课程点击进入面授班课程详情页
     @unittest.skip('test')
     def test_open_face_coursedetail(self):
         openflag = mycourse.click_my_course_page_face_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开面授班课程失败")
+        coursedetail.click_back_btn(self.driver, self.cfg)
         
     #从我的课程点击进入直播课程详情页
     @unittest.skip('test')
     def test_open_live_coursedetail(self):
         openflag = mycourse.click_my_course_page_live_list_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开直播课程失败")
+        coursedetail.click_back_btn(self.driver, self.cfg)
     
     #从我的课程点击进入考试卷开始答题页
     @unittest.skip('test')
     def test_open_examination(self):
         openflag = mycourse.click_my_course_page_examination_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开考试卷失败")
+        examstart.click_back_btn(self.driver, self.cfg)
     
     
     #从我的课程点击进入练习卷开始答题页
@@ -105,11 +113,15 @@ class MyCoursePageTest(unittest.TestCase):
     def test_open_exercise(self):
         openflag = mycourse.click_my_course_page_exercise_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开练习卷失败")
+        examstart.click_back_btn(self.driver, self.cfg)
+        
         
     #从我的课程点击进入题库开始答题页
     def test_open_question_bank(self):
         openflag = mycourse.click_my_course_page_question_bank_item(self.driver, self.cfg)
         self.assertTrue(openflag, u"打开题库失败")
+        examstart.click_back_btn(self.driver, self.cfg)
+        
 
     def tearDown(self):
         time.sleep(2)

@@ -1,18 +1,19 @@
 # -*- coding: UTF-8 -*-
+'''
+Created on 2018-8-10
 
+@author: ablesky
+'''
 import unittest
 from appium import webdriver
 import HTMLTestRunner, time
-import login
-
 try:
     import configparser as ConfigParser
 except ImportError:
     import ConfigParser
-
 import codecs
 
-class LoginTest(unittest.TestCase):
+class InstallTest(unittest.TestCase):
 
     def setUp(self):
         
@@ -34,32 +35,13 @@ class LoginTest(unittest.TestCase):
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)
                                      
-        self.mobile_num = self.cfg.get('env_para', 'mobile_num')
-        self.mobile_pwd = self.cfg.get('env_para', 'mobile_pwd')
-        
-        self.username_num = self.cfg.get('env_para', 'username_num')
-        self.username_pwd = self.cfg.get('env_para', 'username_pwd')
-        
-        self.email_num = self.cfg.get('env_para', 'email_num')
-        self.email_pwd = self.cfg.get('env_para', 'email_pwd')
-    
-     
-    def test_loginby_username(self):
-        login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
-        login.logout_by_exit_btn(self.driver, self.cfg)
-        
-    @unittest.skip('test')  
-    def test_loginby_mobile(self):
-        login.login_by_mobile(self.cfg, self.driver, self.mobile_num, self.mobile_pwd)
-        time.sleep(3)
-        #login.logout_by_exit_btn(self.driver, self.cfg)
-    
-    @unittest.skip('test')  
-    def test_loginby_email(self):
-        login.login_by_email(self.cfg, self.driver, self.email_num, self.email_pwd)
-        time.sleep(3)
-        #login.logout_by_exit_btn(self.driver, self.cfg)
-      
+    def test_install_apk(self):
+        isInstall = self.driver.is_app_installed("com.ablesky.ui.activity")
+        print isInstall
+        if(False == isInstall):
+            self.driver.install_app("..\app\AbleSky_V8.6_WWW_201808101552.apk")
+        self.driver.launch_app()
+        time.sleep(2)
     
     def tearDown(self):
         self.driver.quit()
@@ -68,7 +50,7 @@ class LoginTest(unittest.TestCase):
 if __name__ == "__main__":
     
     
-    suite_login = unittest.TestLoader().loadTestsFromTestCase(LoginTest)
+    suite_login = unittest.TestLoader().loadTestsFromTestCase(InstallTest)
     
     allsuites = []
     allsuites.append(suite_login)
