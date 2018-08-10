@@ -27,9 +27,8 @@ class LoginTest(unittest.TestCase):
         desired_caps['appPackage'] = self.cfg.get('env_para', 'appPackage')
         desired_caps['appActivity'] = self.cfg.get('env_para', 'appActivity')
         desired_caps['deviceName'] = self.cfg.get('env_para', 'deviceName')
-        desired_caps['unicodeKeyboard'] = self.cfg.get('env_para', 'unicodeKeyboard')
-        desired_caps['resetKeyboard'] = self.cfg.get('env_para', 'resetKeyboard')
-        
+        desired_caps['unicodeKeyboard'] = True
+        desired_caps['resetKeyboard'] = True
         
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)

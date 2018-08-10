@@ -68,6 +68,8 @@ def click_my_course_page_dianbo_list_item(driver,cfg):
         mycourse.click_course_list_item(courselist,0)
         title = coursedetail.get_course_title(driver, cfg,'dianbo')
         if title == playCourseTitle:
+            print u"关闭详情页返回到我的课程"
+            coursedetail.click_back_btn(driver, cfg)
             return True
         else:
             return False
@@ -94,6 +96,8 @@ def click_my_course_page_presell_list_item(driver,cfg):
         mycourse.click_course_list_item(courselist,0)
         title = coursedetail.get_course_title(driver, cfg,'presell')
         if title == playCourseTitle:
+            print u"关闭详情页返回到我的课程"
+            coursedetail.click_back_btn(driver, cfg)
             return True
         else:
             return False
@@ -119,6 +123,8 @@ def click_my_course_page_network_list_item(driver,cfg):
         mycourse.click_course_list_item(courselist,0)
         title = coursedetail.get_course_title(driver, cfg,'network')
         if title == playCourseTitle:
+            print u"关闭详情页返回到我的课程"
+            coursedetail.click_back_btn(driver, cfg)
             return True
         else:
             return False
@@ -140,6 +146,8 @@ def click_my_course_page_live_list_item(driver,cfg):
         mycourse.click_course_list_item(courselist,0)
         title = coursedetail.get_course_title(driver, cfg,'live')
         if title == CourseTitle:
+            print u"关闭详情页返回到我的课程"
+            coursedetail.click_back_btn(driver, cfg)
             return True
         else:
             return False
@@ -160,6 +168,8 @@ def click_my_course_page_face_list_item(driver,cfg):
         mycourse.click_course_list_item(courselist,0)
         title = coursedetail.get_course_title(driver, cfg,'face')
         if title == CourseTitle:
+            print u"关闭详情页返回到我的课程"
+            coursedetail.click_back_btn(driver, cfg)
             return True
         else:
             return False
@@ -185,6 +195,8 @@ def click_my_course_page_examination_item(driver,cfg):
         print u"打开考试卷开始答题页"
         mycourse.click_course_list_item(examlist,0)
         title = examstart.get_exam_title(driver, cfg)
+        print u"关闭开始答题页返回到我的课程"
+        examstart.click_back_btn(driver, cfg)
         if title == examtitle:            
             return True
         else:
@@ -211,6 +223,8 @@ def click_my_course_page_exercise_item(driver,cfg):
         print u"打开练习卷开始答题页"
         mycourse.click_course_list_item(examlist,0)
         title = examstart.get_exam_title(driver, cfg)
+        print u"关闭开始答题页返回到我的课程"
+        examstart.click_back_btn(driver, cfg)
         if title == examtitle:      
             return True
         else:
@@ -233,6 +247,8 @@ def click_my_course_page_question_bank_item(driver,cfg):
         print u"打开题库开始答题页面"
         mycourse.click_course_list_item(questionlist, 1)
         title = examstart.get_question_bank_title(driver, cfg)
+        print u"关闭开始答题页返回到我的课程"
+        examstart.click_back_btn(driver, cfg)
         if u"题库详情" == title:      
             return True
         else:
