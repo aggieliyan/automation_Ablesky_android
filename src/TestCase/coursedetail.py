@@ -11,6 +11,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+from PO.schoolhome_page import SchoolHome
+from PO.teacher_page import Teacher
+
 def click_back_btn(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_back_btn()
@@ -74,6 +77,39 @@ def get_course_title(driver,cfg,coursetype):
         coursedetail.click_first_tab()
     title = coursedetail.get_course_title()
     return title
+
+def open_teacher_info(driver,cfg,index):
+    coursedetail = CourseDetailPage(driver,cfg)
+    teacherList = coursedetail.get_teacher_list()
+    teacherName = coursedetail.get_teacher_name_list()[index].text
+    print u"详情页老师：",teacherName
+    print u"打开老师详情页"
+    teacherList[index].click()
+    teacher = Teacher(driver,cfg)
+    driver.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
+    teacherAndOrgName = teacher.get_teacher_name()
+    print u"老师详情页：",teacherAndOrgName
+    #teacher.click_back_btn()
+    if teacherName in teacherAndOrgName:
+        return True
+    else:
+        return False
+    
+def open_org_info(driver,cfg):
+    coursedetail = CourseDetailPage(driver,cfg)
+    orgname = coursedetail.get_org_name()
+    coursedetail.click_org_info()
+    school = SchoolHome(driver,cfg)
+    driver.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
+    orgNameInSchoolHome = school.get_org_title()
+    if orgname == orgNameInSchoolHome:
+        return True
+    else:
+        return False
+    
+def open_course_tag(driver,cfg):
+    coursedetail = CourseDetailPage(driver,cfg)
+    coursedetail.click_course_tag()
 
     
 '''
