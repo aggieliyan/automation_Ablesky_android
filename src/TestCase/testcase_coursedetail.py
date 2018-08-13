@@ -75,6 +75,7 @@ class CourseDetailTest(unittest.TestCase):
         self.assertTrue(flag, u"打开老师详情页错误")
         self.driver.switch_to.context("NATIVE_APP")
         
+    @unittest.skip("test")    
     def test_open_school_home(self):
         mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         coursedetail.click_first_tab(self.driver, self.cfg)
@@ -85,6 +86,15 @@ class CourseDetailTest(unittest.TestCase):
         self.driver.press_keycode(4)
         self.assertTrue(flag, u"打开机构首页错误")
         self.driver.switch_to.context("NATIVE_APP")
+        
+    def test_open_course_tag(self):
+        mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
+        coursedetail.click_first_tab(self.driver, self.cfg)
+        base = Base(self.driver)
+        base.swipeUp(0.75,0.25,500)
+        base.swipeUp(0.75,0.5,500)
+        flag = coursedetail.open_course_tag(self.driver, self.cfg)
+        self.assertTrue(flag, u"点击课程标签错误")
         
     def tearDown(self):
         time.sleep(2)

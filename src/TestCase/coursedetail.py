@@ -14,6 +14,8 @@ from selenium.webdriver.common.by import By
 from PO.schoolhome_page import SchoolHome
 from PO.teacher_page import Teacher
 
+import searchresult
+
 def click_back_btn(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_back_btn()
@@ -109,7 +111,18 @@ def open_org_info(driver,cfg):
     
 def open_course_tag(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
+    courseTag = coursedetail.get_course_tag_text()
+    
     coursedetail.click_course_tag()
+       
+    key = searchresult.get_search_key(driver, cfg)
+    
+    searchresult.click_cancel_btn(driver, cfg)
+    
+    if(courseTag == key):
+        return True
+    else:
+        return False
 
     
 '''
