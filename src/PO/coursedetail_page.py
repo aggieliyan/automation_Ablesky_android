@@ -157,4 +157,17 @@ class CourseDetailPage(Base):
         element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_org_name_by'), \
                               self.cfg.get('course_detail_page', 'course_detail_org_name'))
         return element.text
-        
+    
+    def get_bottom_recommend_list(self):
+        time.sleep(2)
+        list = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list'))
+        recommendList = list.find_elements(self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_item_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_item'))
+        return recommendList
+    
+    def get_bottom_recommend_list_item_title(self):
+        time.sleep(2)
+        titlesList = self.dr.find_elements(self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_item_title_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_item_title'))
+        return titlesList

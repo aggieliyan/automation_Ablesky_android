@@ -84,13 +84,11 @@ def open_teacher_info(driver,cfg,index):
     coursedetail = CourseDetailPage(driver,cfg)
     teacherList = coursedetail.get_teacher_list()
     teacherName = coursedetail.get_teacher_name_list()[index].text
-    print u"详情页老师：",teacherName
     print u"打开老师详情页"
     teacherList[index].click()
     teacher = Teacher(driver,cfg)
     driver.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
     teacherAndOrgName = teacher.get_teacher_name()
-    print u"老师详情页：",teacherAndOrgName
     #teacher.click_back_btn()
     if teacherName in teacherAndOrgName:
         return True
@@ -100,6 +98,7 @@ def open_teacher_info(driver,cfg,index):
 def open_org_info(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     orgname = coursedetail.get_org_name()
+    print u"点击机构信息进入机构首页"
     coursedetail.click_org_info()
     school = SchoolHome(driver,cfg)
     driver.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
@@ -112,7 +111,7 @@ def open_org_info(driver,cfg):
 def open_course_tag(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     courseTag = coursedetail.get_course_tag_text()
-    
+    print u"点击课程标签"
     coursedetail.click_course_tag()
        
     key = searchresult.get_search_key(driver, cfg)
@@ -123,7 +122,23 @@ def open_course_tag(driver,cfg):
         return True
     else:
         return False
-
+    
+def click_bottom_recommend_course(driver,cfg,item):
+    coursedetail = CourseDetailPage(driver,cfg)
+    courseList = coursedetail.get_bottom_recommend_list()
+    title = coursedetail.get_bottom_recommend_list_item_title()[item].text
+    if '...' in title:
+        title = title[:-3]
+    print title
+    print u"点击第",item+1,u"个推荐课程"
+    courseList[item].click()
+    time.sleep(3)
+    currentTitle = get_course_title(driver,cfg,"dianbo")
+    print currentTitle
+    if(title in currentTitle):
+        return True
+    else:
+        return False
     
 '''
 #报班课程

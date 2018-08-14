@@ -8,7 +8,7 @@ Created on 2018-8-6
 
 import unittest
 from appium import webdriver
-import HTMLTestRunner, time
+import HTMLTestRunner
 import login
 from PO.index_page import Index
 from PO.personal_page import Personal

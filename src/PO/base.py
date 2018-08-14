@@ -4,6 +4,8 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 
 from appium.webdriver.mobilecommand import MobileCommand
+
+from selenium.webdriver.support.ui import WebDriverWait
   
 class Base():
        
@@ -18,6 +20,7 @@ class Base():
         day = time.strftime('%Y-%m-%d', time.localtime(time.time()))
         return day
     
+    '''
     def find_element(self, how, what):
         flag = None
         try:
@@ -27,6 +30,7 @@ class Base():
             flag = False
         finally:
             return flag
+            
     def find_elements(self, how, what):
         flag = None
         try:
@@ -36,6 +40,27 @@ class Base():
             flag = False
         finally:
             return flag
+    '''    
+    def find_element(self, how, what):
+        flag = None
+        try:
+            WebDriverWait(self.dr,10,0.5,NoSuchElementException).until(self.dr.find_element(by=how, value=what))
+            flag = True
+        except NoSuchElementException,e: 
+            flag = False
+        finally:
+            return flag
+    
+    def find_elements(self, how, what):
+        flag = None
+        try:
+            WebDriverWait(self.dr,10,0.5,NoSuchElementException).until(self.dr.find_elements(by=how, value=what))
+            flag = True
+        except NoSuchElementException,e: 
+            flag = False
+        finally:
+            return flag
+    
     
     def save_screenshot(self):
         filename = self.datatime_now() + '.png'

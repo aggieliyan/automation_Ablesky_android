@@ -189,9 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<p class='attribute'><strong>Start Time:</strong> 2018-08-06 16:20:34</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:44.323000</p>
-<p class='attribute'><strong>Status:</strong> Pass 1</p>
+<p class='attribute'><strong>Start Time:</strong> 2018-08-14 16:55:41</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:33.441000</p>
+<p class='attribute'><strong>Status:</strong> Error 1</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
 </div>
@@ -221,40 +221,48 @@ function showOutput(id, name) {
     <td>View</td>
 </tr>
 
-<tr class='passClass'>
-    <td>UnLoginTest</td>
-    <td>1</td>
+<tr class='errorClass'>
+    <td>CourseDetailTest</td>
     <td>1</td>
     <td>0</td>
     <td>0</td>
+    <td>1</td>
     <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
 </tr>
 
-<tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test_click_the_quick_entry_of_the_personal_center_without_loggin_in</div></td>
+<tr id='ft1.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_open_course_detail_by_click_bottom_recommend_course</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
-        pass</a>
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1')" >
+        error</a>
 
-    <div id='div_pt1.1' class="popup_window">
+    <div id='div_ft1.1' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-pt1.1: 首页有广告先关闭广告，否则直接点击我的进入个人中心
-未登录情况下点击我的课程
-未登录情况下点击我的收藏
-未登录情况下点击关注网校
-未登录情况下点击我的下载
-未登录情况下点击优惠券
-未登录情况下点击会员
-未登录情况下点击账户余额
-未登录情况下点击推荐有奖
-未登录情况下点击分享收益
+ft1.1: 首页有广告关闭广告后进入个人中心,否则pass
+Traceback (most recent call last):
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\testcase_coursedetail.py", line 55, in setUp
+    login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\login.py", line 51, in login_by_username
+    open_login_page(driver,cfg)
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\login.py", line 28, in open_login_page
+    index.click_tab_myself_btn()
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\PO\index_page.py", line 35, in click_tab_myself_btn
+    self.cfg.get('index_page', 'tab_myself_btn')).click()
+  File "E:\Program Files\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 832, in find_element
+    'value': value})['value']
+  File "E:\Program Files\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 297, in execute
+    self.error_handler.check_response(response)
+  File "E:\Program Files\python\lib\site-packages\appium\webdriver\errorhandler.py", line 29, in check_response
+    raise wde
+WebDriverException: Message: An unknown server-side error occurred while processing the command.
+
 
 
         </pre>
@@ -267,9 +275,9 @@ pt1.1: 首页有广告先关闭广告，否则直接点击我的进入个人中�
 <tr id='total_row'>
     <td>Total</td>
     <td>1</td>
+    <td>0</td>
+    <td>0</td>
     <td>1</td>
-    <td>0</td>
-    <td>0</td>
     <td>&nbsp;</td>
 </tr>
 </table>

@@ -49,18 +49,17 @@ class CourseDetailTest(unittest.TestCase):
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)
         
+        time.sleep(3)
         self.username_num = self.cfg.get('env_para', 'username_num')
         self.username_pwd = self.cfg.get('env_para', 'username_pwd')
         
         login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
         
-        time.sleep(2)
         self.index = Index(self.driver, self.cfg)
-        time.sleep(2)
         self.index.click_tab_myself_btn()
-        time.sleep(2)
         
         self.personal = Personal(self.driver, self.cfg)
+        print u"打开我的课程"
         self.personal.click_my_course()
         
     @unittest.skip("test")     
@@ -87,6 +86,7 @@ class CourseDetailTest(unittest.TestCase):
         self.assertTrue(flag, u"打开机构首页错误")
         self.driver.switch_to.context("NATIVE_APP")
         
+    @unittest.skip("test")    
     def test_open_course_tag(self):
         mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         coursedetail.click_first_tab(self.driver, self.cfg)
@@ -95,6 +95,16 @@ class CourseDetailTest(unittest.TestCase):
         base.swipeUp(0.75,0.5,500)
         flag = coursedetail.open_course_tag(self.driver, self.cfg)
         self.assertTrue(flag, u"点击课程标签错误")
+        
+    def test_open_course_detail_by_click_bottom_recommend_course(self):
+        mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
+        coursedetail.click_first_tab(self.driver, self.cfg)
+        base = Base(self.driver)
+        base.swipeUp(0.75,0.25,500)
+        base.swipeUp(0.75,0.25,500)
+        base.swipeUp(0.75,0.5,500)
+        flag = coursedetail.click_bottom_recommend_course(self.driver, self.cfg,0)
+        self.assertTrue(flag, u"点击底部推荐课程错误")
         
     def tearDown(self):
         time.sleep(2)
