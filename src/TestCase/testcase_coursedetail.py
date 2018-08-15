@@ -28,8 +28,7 @@ import coursedetail
 from PO.base import Base
 
 class CourseDetailTest(unittest.TestCase):
-
-
+    
     def setUp(self):
         cfgfile = "..\config\config.ini"
         
@@ -74,7 +73,7 @@ class CourseDetailTest(unittest.TestCase):
         self.assertTrue(flag, u"打开老师详情页错误")
         self.driver.switch_to.context("NATIVE_APP")
         
-    @unittest.skip("test")    
+    @unittest.skip("test")   
     def test_open_school_home(self):
         mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         coursedetail.click_first_tab(self.driver, self.cfg)
@@ -96,12 +95,48 @@ class CourseDetailTest(unittest.TestCase):
         flag = coursedetail.open_course_tag(self.driver, self.cfg)
         self.assertTrue(flag, u"点击课程标签错误")
         
+    @unittest.skip("test")    
     def test_open_course_detail_by_click_bottom_recommend_course(self):
         mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         coursedetail.click_first_tab(self.driver, self.cfg)
         base = Base(self.driver)
         base.swipeUp(0.75,0.25,500)
         base.swipeUp(0.75,0.25,500)
+        base.swipeUp(0.75,0.5,500)
+        flag = coursedetail.click_bottom_recommend_course(self.driver, self.cfg,0)
+        self.assertTrue(flag, u"点击底部推荐课程错误")
+       
+    def test_course_detail(self): 
+        mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
+        coursedetail.click_first_tab(self.driver, self.cfg)
+        base = Base(self.driver)
+        print u"开始测试打开老师详情..."
+        base.swipeUp(0.75,0.5,500)
+        flag = coursedetail.open_teacher_info(self.driver, self.cfg, 0)
+        time.sleep(2)
+        self.driver.press_keycode(4)
+        self.assertTrue(flag, u"打开老师详情页错误")
+        self.driver.switch_to.context("NATIVE_APP")
+        base.shutdownChromeDriver()
+        
+        print u"开始测试打开机构首页"
+        coursedetail.click_first_tab(self.driver, self.cfg)
+        base.swipeUp(0.75,0.5,500)
+        flag = coursedetail.open_org_info(self.driver, self.cfg)       
+        time.sleep(2)
+        self.driver.press_keycode(4)
+        self.assertTrue(flag, u"打开机构首页错误")
+        self.driver.switch_to.context("NATIVE_APP")
+        base.shutdownChromeDriver()
+        
+        print u"开始测试课程标签"
+        coursedetail.click_first_tab(self.driver, self.cfg)
+        base.swipeUp(0.75,0.5,500)
+        flag = coursedetail.open_course_tag(self.driver, self.cfg)
+        self.assertTrue(flag, u"点击课程标签错误")
+        
+        print u"开始测试点击底部推荐课程"
+        coursedetail.click_first_tab(self.driver, self.cfg)
         base.swipeUp(0.75,0.5,500)
         flag = coursedetail.click_bottom_recommend_course(self.driver, self.cfg,0)
         self.assertTrue(flag, u"点击底部推荐课程错误")

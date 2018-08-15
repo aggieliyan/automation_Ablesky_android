@@ -6,12 +6,23 @@ from selenium.common.exceptions import NoSuchElementException
 from appium.webdriver.mobilecommand import MobileCommand
 
 from selenium.webdriver.support.ui import WebDriverWait
-  
+
+import win32com.client
+import wmi
+
 class Base():
        
     def __init__(self, driver):
         self.dr = driver
-     
+        
+    def shutdownChromeDriver(self):
+        wmi1 = win32com.client.GetObject('winmgmts:')
+        c = wmi.WMI()
+        for p in wmi1.InstancesOf('win32_process'):
+            if p.Name == 'chromedriver.exe':
+                for process in c.win32_Process(ProcessId=p.Properties_('ProcessId')):
+                    process.Terminate()
+            
     def datatime_now(self):
         now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
         return now

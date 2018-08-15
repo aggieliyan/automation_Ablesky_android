@@ -16,6 +16,7 @@ from PO.teacher_page import Teacher
 
 import searchresult
 
+
 def click_back_btn(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_back_btn()
@@ -23,10 +24,10 @@ def click_back_btn(driver,cfg):
 def if_collect_course(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     collectedtext = coursedetail.get_collect_icon_text()
-    if collectedtext == '收藏':
-        return 1
+    if '收藏' == collectedtext:
+        return False
     else:
-        return 0
+        return True
 
     
 def click_collect_icon(driver,cfg):
@@ -34,8 +35,6 @@ def click_collect_icon(driver,cfg):
     coursedetail.click_collect_icon()
 
 
-
-#�㲥��
 def click_first_tab(driver, cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_first_tab()
@@ -113,7 +112,7 @@ def open_course_tag(driver,cfg):
     courseTag = coursedetail.get_course_tag_text()
     print u"点击课程标签"
     coursedetail.click_course_tag()
-       
+    time.sleep(3)
     key = searchresult.get_search_key(driver, cfg)
     
     searchresult.click_cancel_btn(driver, cfg)
@@ -129,12 +128,10 @@ def click_bottom_recommend_course(driver,cfg,item):
     title = coursedetail.get_bottom_recommend_list_item_title()[item].text
     if '...' in title:
         title = title[:-3]
-    print title
     print u"点击第",item+1,u"个推荐课程"
     courseList[item].click()
     time.sleep(3)
     currentTitle = get_course_title(driver,cfg,"dianbo")
-    print currentTitle
     if(title in currentTitle):
         return True
     else:
