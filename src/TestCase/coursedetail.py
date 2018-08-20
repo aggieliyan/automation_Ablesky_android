@@ -14,12 +14,18 @@ from selenium.webdriver.common.by import By
 from PO.schoolhome_page import SchoolHome
 from PO.teacher_page import Teacher
 
+from PO.base import Base
+
 import searchresult
 
 
 def click_back_btn(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_back_btn()
+
+def click_video_box_back_btn(driver,cfg):
+    coursedetail = CourseDetailPage(driver,cfg)
+    coursedetail.click_video_box_back_btn()
 
 def if_collect_course(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
@@ -60,14 +66,14 @@ def click_first_courseware(driver, cfg):
     
 def download_all_courseware(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
-    print u'点击下载'
+    print u'---点击下载'
     coursedetail.click_download_icon()
-    print u'点击全选'
+    print u'---点击全选'
     coursedetail.click_checkall_download()
-    print u'点击立即下载'
+    print u'---点击立即下载'
     coursedetail.click_start_download()
-    element = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,'.//*[contains(@text,�����ء�)]')))
-    return element    
+    print u'---关闭课程详情页，打开下载页面'
+    coursedetail.click_back_btn()  
     
 def get_course_title(driver,cfg,coursetype):
     coursedetail = CourseDetailPage(driver,cfg)
@@ -83,10 +89,11 @@ def open_teacher_info(driver,cfg,index):
     coursedetail = CourseDetailPage(driver,cfg)
     teacherList = coursedetail.get_teacher_list()
     teacherName = coursedetail.get_teacher_name_list()[index].text
-    print u"打开老师详情页"
+    print u"---打开老师详情页"
     teacherList[index].click()
     teacher = Teacher(driver,cfg)
-    driver.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
+    base = Base(driver)
+    base.switchToWebview()
     teacherAndOrgName = teacher.get_teacher_name()
     #teacher.click_back_btn()
     if teacherName in teacherAndOrgName:
@@ -97,10 +104,11 @@ def open_teacher_info(driver,cfg,index):
 def open_org_info(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     orgname = coursedetail.get_org_name()
-    print u"点击机构信息进入机构首页"
+    print u"---点击机构信息进入机构首页"
     coursedetail.click_org_info()
     school = SchoolHome(driver,cfg)
-    driver.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
+    base = Base(driver)
+    base.switchToWebview()
     orgNameInSchoolHome = school.get_org_title()
     if orgname == orgNameInSchoolHome:
         return True
@@ -110,7 +118,7 @@ def open_org_info(driver,cfg):
 def open_course_tag(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     courseTag = coursedetail.get_course_tag_text()
-    print u"点击课程标签"
+    print u"---点击课程标签"
     coursedetail.click_course_tag()
     time.sleep(3)
     key = searchresult.get_search_key(driver, cfg)
@@ -128,7 +136,7 @@ def click_bottom_recommend_course(driver,cfg,item):
     title = coursedetail.get_bottom_recommend_list_item_title()[item].text
     if '...' in title:
         title = title[:-3]
-    print u"点击第",item+1,u"个推荐课程"
+    print u"---点击第",item+1,u"个推荐课程"
     courseList[item].click()
     time.sleep(3)
     currentTitle = get_course_title(driver,cfg,"dianbo")
@@ -136,6 +144,23 @@ def click_bottom_recommend_course(driver,cfg,item):
         return True
     else:
         return False
+    
+def click_video_box(driver,cfg):
+    coursedetail = CourseDetailPage(driver,cfg)
+    coursedetail.click_video_box()
+    
+def play_courseware(driver,cfg,index):
+    coursedetail = CourseDetailPage(driver,cfg)
+    coursewarelist = coursedetail.get_courseware_list()
+    #length = len(coursewarelist)
+    print u"---点击课件播放"
+    coursewarelist[index].click()
+    time.sleep(10)
+    click_video_box(driver,cfg)
+    #driver.tap([(0,0),(1080,607)],500)
+    print u"---全屏播放"
+    coursedetail.click_full_screen_btn()
+    
     
 '''
 #报班课程

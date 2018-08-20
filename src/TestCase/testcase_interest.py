@@ -1,9 +1,20 @@
 # -*- coding: UTF-8 -*-
+'''
+Created on 2018-8-16
 
+@author: ablesky
+'''
 import unittest
+
 from appium import webdriver
 import HTMLTestRunner
+
 import login
+from PO.index_page import Index
+
+import time
+
+from PO.personal_page import Personal
 
 try:
     import configparser as ConfigParser
@@ -12,11 +23,14 @@ except ImportError:
 
 import codecs
 
-class LoginTest(unittest.TestCase):
+from PO.setting_page import Setting
+import interest
 
+class InterestTest(unittest.TestCase):
+    
     def setUp(self):
-        
         cfgfile = "..\config\config.ini"
+        
         self.cfg = ConfigParser.ConfigParser()
         
         self.cfg.readfp(codecs.open(cfgfile, "r", "gb2312"))
@@ -29,47 +43,39 @@ class LoginTest(unittest.TestCase):
         desired_caps['deviceName'] = self.cfg.get('env_para', 'deviceName')
         desired_caps['unicodeKeyboard'] = self.cfg.get('env_para', 'unicodeKeyboard')
         desired_caps['resetKeyboard'] = self.cfg.get('env_para', 'resetKeyboard')
-        
-        
+        desired_caps['automationName'] = self.cfg.get('env_para', 'automationName')
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)
-                                     
-        self.mobile_num = self.cfg.get('env_para', 'mobile_num')
-        self.mobile_pwd = self.cfg.get('env_para', 'mobile_pwd')
         
+        time.sleep(3)
         self.username_num = self.cfg.get('env_para', 'username_num')
         self.username_pwd = self.cfg.get('env_para', 'username_pwd')
         
-        self.email_num = self.cfg.get('env_para', 'email_num')
-        self.email_pwd = self.cfg.get('env_para', 'email_pwd')
-    
-     
-    def test_loginby_username(self):
-        text = login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
-        self.assertTrue(u"登录/注册" != text, u"用户名登录错误")
-        login.logout_by_exit_btn(self.driver, self.cfg)
+        login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
         
-    @unittest.skip("test")     
-    def test_loginby_mobile(self):
-        text = login.login_by_mobile(self.cfg, self.driver, self.mobile_num, self.mobile_pwd)
-        self.assertTrue(u"登录/注册" != text, u"手机号登录错误")
-        login.logout_by_exit_btn(self.driver, self.cfg)
+        self.index = Index(self.driver, self.cfg)
+        self.index.click_tab_myself_btn()
         
-    @unittest.skip("test") 
-    def test_loginby_email(self):
-        text = login.login_by_email(self.cfg, self.driver, self.email_num, self.email_pwd)
-        self.assertTrue(u"登录/注册" != text, u"邮箱登录错误")
-        login.logout_by_exit_btn(self.driver, self.cfg)
-      
-    
+        self.personal = Personal(self.driver, self.cfg)
+        print u"打开设置"
+        self.personal.click_setting()
+        self.setting = Setting(self.driver, self.cfg)
+        print u"打开修改兴趣页面"
+        self.setting.click_set_interest_item()
+        
+    def test_modify_interest(self):
+        interest.choose_interest(self.driver, self.cfg)
+        #self.assertTrue(flag, u"修改兴趣失败")
+        self.setting.click_logout_btn()
+        
     def tearDown(self):
         self.driver.quit()
-
+        
 
 if __name__ == "__main__":
     
     
-    suite_login = unittest.TestLoader().loadTestsFromTestCase(LoginTest)
+    suite_login = unittest.TestLoader().loadTestsFromTestCase(InterestTest)
     
     allsuites = []
     allsuites.append(suite_login)
@@ -83,6 +89,3 @@ if __name__ == "__main__":
                 description='This demonstrates the report output by HTMLTestRunner.'
                 )
     runner.run(alltests)
-
-
-    

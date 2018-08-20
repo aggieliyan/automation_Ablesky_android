@@ -46,6 +46,11 @@ class MyCourse(Base):
         self.dr.find_element(self.cfg.get('my_course_page', 'my_course_search_btn_by'), \
                              self.cfg.get('my_course_page', 'my_course_search_btn')).click()
     
+    def input_search_key(self,key):
+        time.sleep(2)
+        self.dr.find_element(self.cfg.get('my_course_page', 'my_course_search_key_by'), \
+                             self.cfg.get('my_course_page', 'my_course_search_key')).send_keys(key)
+    
     def click_filter_btn(self):
         time.sleep(2)
         self.dr.find_element(self.cfg.get('my_course_page', 'my_course_filter_btn_by'), \
@@ -65,7 +70,6 @@ class MyCourse(Base):
                              
     def click_course_list_item(self,list,item):
         list[item].click()
-        time.sleep(2)
         
     def get_course_list_titles(self):
         time.sleep(2)

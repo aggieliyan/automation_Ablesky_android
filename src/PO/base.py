@@ -3,12 +3,12 @@
 import time
 from selenium.common.exceptions import NoSuchElementException
 
-from appium.webdriver.mobilecommand import MobileCommand
-
 from selenium.webdriver.support.ui import WebDriverWait
 
 import win32com.client
 import wmi
+
+
 
 class Base():
        
@@ -22,6 +22,12 @@ class Base():
             if p.Name == 'chromedriver.exe':
                 for process in c.win32_Process(ProcessId=p.Properties_('ProcessId')):
                     process.Terminate()
+                    
+    def switchToNative(self):
+        self.dr.switch_to.context("NATIVE_APP")
+    
+    def switchToWebview(self):
+        self.dr.switch_to.context("WEBVIEW_com.ablesky.ui.activity")
             
     def datatime_now(self):
         now = time.strftime('%Y-%m-%d-%H_%M_%S', time.localtime(time.time()))
@@ -117,18 +123,6 @@ class Base():
         y1 = int(l[1] * 0.5)
         x2 = int(l[0] * 0.75)
         self.dr.swipe(x1, y1, x2, y1, t)
-    '''
-    modified by sdu
-    '''
-    def switch_h5(self):
-        self.dr.execute(MobileCommand.SWITCH_TO_CONTEXT, {"name": "webview的context名称"})
-
-    def switch_app(self):
-        self.dr.execute(MobileCommand.SWITCH_TO_CONTEXT, {"name": "NATIVE_APP"})  
-    
-    '''
-    ended
-    '''   
         
 # 启动/关闭appium服务
 # 

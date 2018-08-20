@@ -21,15 +21,15 @@ def click_sure_btn_after_open_clear_dlg(driver, cfg):
         collectcourselist = mycollect.get_collectcourse_list()
         list_len = mycollect.get_collectcourse_list_length(collectcourselist)
         if list_len != 0:
-            print u"点击清空按钮"
+            print u"---点击清空按钮"
             mycollect.click_clear_btn()
-            print u"确定清空"
+            print u"---确定清空"
             mycollect.click_clear_dlg_sure_btn()
     
         noDataFlag = mycollect.get_list_no_data_flag()
         return noDataFlag
     except:
-        print u"我的收藏页面为空，NoSuchElementException"
+        print u"---我的收藏页面为空，NoSuchElementException"
         return False
     
     
@@ -42,9 +42,9 @@ def click_cancel_btn_after_open_clear_dlg(driver, cfg):
         collectcourselist = mycollect.get_collectcourse_list()
         list_len = mycollect.get_collectcourse_list_length(collectcourselist)
         if list_len != 0:
-            print u"点击清空按钮"
+            print u"---点击清空按钮"
             mycollect.click_clear_btn()
-            print u"取消清空"
+            print u"---取消清空"
             mycollect.click_clear_dlg_cancel_btn()
     
         list_len = mycollect.get_collectcourse_list_length(mycollect.get_collectcourse_list())
@@ -53,7 +53,7 @@ def click_cancel_btn_after_open_clear_dlg(driver, cfg):
         else:
             return False
     except:
-        print u"我的收藏页面为空，NoSuchElementException"
+        print u"---我的收藏页面为空，NoSuchElementException"
         return False
     
    
@@ -68,7 +68,7 @@ def click_collect_list_item_to_open_course_detail(driver, cfg,index):
             mycollect.click_collectcourseitem(collectcourselist, index)
             time.sleep(5)
     except:
-        print u"我的收藏列表为空，NoSuchElementException" 
+        print u"---我的收藏列表为空，NoSuchElementException" 
         
     
 
@@ -106,9 +106,9 @@ def abolish_the_course_of_collection_by_longclick(driver,cfg,index):
         courseList = mycollect.get_collectcourse_list()
         listLength = mycollect.get_collectcourse_list_length(courseList)
         if 0 != listLength:
-            print u"长按课程"
+            print u"---长按课程"
             mycollect.longClick_collectcourseitem(courseList, index)
-            print u"点击确定，取消收藏"
+            print u"---点击确定，取消收藏"
             mycollect.click_cancel_abolish_dlg_sure_btn()
         
             if 0 != (listLength -1):
@@ -128,7 +128,7 @@ def abolish_the_course_of_collection_by_longclick(driver,cfg,index):
         else:   
             return u"暂时没有收藏不能取消收藏"
     except:
-        print u"我的收藏页面为空，NoSuchElementException"
+        print u"---我的收藏页面为空，NoSuchElementException"
         return 0
         
     
@@ -141,12 +141,12 @@ def abolish_the_course_of_collection_in_coursedetail(driver,cfg,index):
         collecttitlelist = mycollect.get_list_titles()
         title = collecttitlelist[index]
         if len(collecttitlelist):
-            print u"打开第",index+1,u"个课程详情页"
+            print u"---打开第",index+1,u"个课程详情页"
             click_collect_list_item_to_open_course_detail(driver, cfg,index)
             time.sleep(2)
-            print u"取消收藏该课程"
+            print u"---取消收藏该课程"
             coursedetail.click_collect_icon(driver, cfg)
-            print u"返回我的收藏页面"
+            print u"---返回我的收藏页面"
             coursedetail.click_back_btn(driver, cfg)
             
         
@@ -167,21 +167,21 @@ def abolish_the_course_of_collection_in_coursedetail(driver,cfg,index):
         else:
             return u"暂时没有收藏不能取消收藏"
     except:
-        print u"我的收藏页面为空，NoSuchElementException"
+        print u"---我的收藏页面为空，NoSuchElementException"
         return 0
     '''
-    print u"打开第",index+1,u"个课程详情页"
+    print u"---打开第",index+1,u"个课程详情页"
     ifopencoursedetail = click_collect_list_item_to_open_course_detail(driver, cfg,index)
         
     if ifopencoursedetail:
         ifcollected = coursedetail.if_collect_course(driver, cfg)
         if ifcollected:
             time.sleep(2)
-            print u"取消收藏该课程"
+            print u"---取消收藏该课程"
             coursedetail.click_collect_icon(driver, cfg)
             ifcollected = coursedetail.if_collect_course(driver, cfg)
             if not ifcollected:
-                print u"取消收藏成功"
+                print u"---取消收藏成功"
                 coursedetail.click_back_btn(driver, cfg)
     
     time.sleep(2)

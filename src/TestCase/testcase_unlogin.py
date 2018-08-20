@@ -13,6 +13,7 @@ import login
 from PO.index_page import Index
 from PO.personal_page import Personal
 import home
+from PO.base import Base
 
 try:
     import configparser as ConfigParser
@@ -45,16 +46,12 @@ class UnLoginTest(unittest.TestCase):
         self.adds = self.cfg.get('env_para', 'adds')
         self.driver = webdriver.Remote(self.adds, desired_caps)
         
-        ctxlist = self.driver.contexts
-        print ctxlist
+        #ctxlist = self.driver.contexts
+        #print ctxlist
     #未登录情况下点击个人中心的快速入口  
     @unittest.skip("test")                      
     def test_click_the_quick_entry_of_the_personal_center_without_loggin_in(self):
-        print u'首页有广告先关闭广告，否则直接点击我的进入个人中心'
-        try:
-            home.close_the_suspended_advertisement(self.driver,self.cfg)
-        except:
-            pass
+        home.enter_home_page(self.driver,self.cfg)
         index = Index(self.driver,self.cfg)
         index.click_tab_myself_btn()
         personalpage = Personal(self.driver,self.cfg)
@@ -141,12 +138,25 @@ class UnLoginTest(unittest.TestCase):
             
     #未登录情况下点击个人中心的快速入口                                  
     def test_switch_bottom_tabbar_without_loggin_in(self):
-        try:
-            print u'首页有广告先关闭广告'
-            home.close_the_suspended_advertisement(self.driver,self.cfg)
-        except:
-            pass
+        home.enter_home_page(self.driver,self.cfg)
         index = Index(self.driver,self.cfg)
+        base = Base(self.driver)
+        
+        print u"切换到首页"
+        index.click_tab_home_btn()
+        try:
+            flag = home.isHomePage(self.driver,self.cfg)
+            self.assertTrue(flag, u"打开首页失败")
+            base.switchToNative()
+            '''
+            home.click_search_box(self.driver,self.cfg)
+            time.sleep(2)
+            base.switchToNative()
+            self.driver.press_keycode(4)
+            '''
+        except Exception,e:
+            print e
+        
         print u"切换到能力圈"
         index.click_tab_circle_btn()
         try:
@@ -155,6 +165,9 @@ class UnLoginTest(unittest.TestCase):
             login.click_back_btn(self.driver,self.cfg)
         except Exception,e:
             print e
+            
+        print u"切换到会员频道"
+        index.click_tab_vip_btn()
             
         print u"切换到交流"
         index.click_tab_communicate_btn()
@@ -165,9 +178,93 @@ class UnLoginTest(unittest.TestCase):
         except Exception,e:
             print e
         
+        print u"切换到我的"    
+        index.click_tab_myself_btn()
+        personalpage = Personal(self.driver,self.cfg)
+        print u'未登录情况下点击我的课程'        
+        personalpage.click_my_course()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击我的课程进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击我的收藏'        
+        personalpage.click_my_collect()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击我的收藏进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+        
+        print u'未登录情况下点击关注网校'        
+        personalpage.click_pay_attention_school()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击关注网校进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击我的下载'        
+        personalpage.click_my_download()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击我的下载进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击优惠券'        
+        personalpage.click_my_coupon()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击优惠券进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击会员'        
+        personalpage.click_my_vip()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击会员进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击账户余额'        
+        personalpage.click_balance()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击账户余额进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击推荐有奖'        
+        personalpage.click_award()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击推荐有奖进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+            
+        print u'未登录情况下点击分享收益'        
+        personalpage.click_share_earning()
+        try:
+            title = login.get_login_page_title(self.driver,self.cfg)
+            self.assertEqual(title, u'登录', u'未登录情况下点击分享收益进入登录页面失败')
+            login.click_back_btn(self.driver,self.cfg)
+        except Exception,e:
+            print e
+        
     def tearDown(self):
         self.driver.quit()
-
+        
 
 if __name__ == "__main__":
     

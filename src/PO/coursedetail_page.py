@@ -66,25 +66,40 @@ class CourseDetailPage(Base):
     
             
     def get_courseware_list(self):
-        time.sleep(5)
-        self.coursewarelist = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_page_courseware_list_by'), \
+        time.sleep(2)
+        coursewarelist = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_page_courseware_list_by'), \
                              self.cfg.get('course_detail_page', 'course_detail_page_courseware_list'))
-        coursewarelistitems = self.coursewarelist.find_elements_by_class_name(self.cfg.get('course_detail_page', 'course_detail_page_courseware_list_item'))
+        coursewarelistitems = coursewarelist.find_elements(self.cfg.get('course_detail_page', 'course_detail_page_courseware_list_item_by'), \
+                                                           self.cfg.get('course_detail_page', 'course_detail_page_courseware_list_item'))
         return coursewarelistitems
+    
+    def get_courseware_titles(self):
+        coursewaretitles = self.dr.find_elements(self.cfg.get('course_detail_page', 'course_detail_content_title_by'), \
+                             self.cfg.get('course_detail_page', 'course_detail_content_title'))
+        return coursewaretitles
     
     def get_courseware_list_length(self,list):
         listlen = len(list)
         return listlen
                                   
-    def click_first_courseware_and_back_my_course(self,list,list_len):
+    def play_courseware_and_back_my_course(self,list,list_len):
         
-        index = random.randint(1,list_len)
+        index = random.randint(0,list_len-1)
         list[index].click()
         
-        time.sleep(15)
+    def click_video_box(self):
+        self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_video_box_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_video_box')).click()
         
-        self.dr.press_keycode(4)
-        
+    def click_full_screen_btn(self):
+        self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_fullscreen_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_fullscreen')).click()
+           
+    def click_video_box_back_btn(self):
+        self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_video_box_back_btn_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_video_box_back_btn')).click()
+           
+    
     def click_customer_service_icon(self):
         time.sleep(2)
         self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_customer_service_icon_by'), \
