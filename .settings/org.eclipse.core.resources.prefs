@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/PO/base.py=UTF-8
 encoding//src/PO/coursedetail_page.py=UTF-8
+encoding//src/PO/download_page.py=UTF-8
 encoding//src/PO/examstart_page.py=UTF-8
 encoding//src/PO/home_page.py=UTF-8
 encoding//src/PO/index_page.py=UTF-8
@@ -16,6 +17,7 @@ encoding//src/PO/searchresult_page.py=UTF-8
 encoding//src/PO/setting_page.py=UTF-8
 encoding//src/PO/teacher_page.py=UTF-8
 encoding//src/TestCase/coursedetail.py=UTF-8
+encoding//src/TestCase/download.py=UTF-8
 encoding//src/TestCase/examstart.py=UTF-8
 encoding//src/TestCase/home.py=UTF-8
 encoding//src/TestCase/interest.py=UTF-8

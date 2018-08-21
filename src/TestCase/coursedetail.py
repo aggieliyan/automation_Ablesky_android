@@ -72,8 +72,6 @@ def download_all_courseware(driver,cfg):
     coursedetail.click_checkall_download()
     print u'---点击立即下载'
     coursedetail.click_start_download()
-    print u'---关闭课程详情页，打开下载页面'
-    coursedetail.click_back_btn()  
     
 def get_course_title(driver,cfg,coursetype):
     coursedetail = CourseDetailPage(driver,cfg)
