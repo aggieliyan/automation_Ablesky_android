@@ -50,24 +50,20 @@ def course_add_download_page_success(driver,cfg,courseTitle):
     '''
 
 
-def play_the_first_download_finish_courseware(driver,cfg):
+def play_the_download_finish_courseware(driver,cfg):
     download = DownloadPage(driver,cfg)
-    list = download.get_all_download_courseware_current_speed_list()
-    list_len = len(list)
+    speedlist = download.get_all_download_courseware_current_speed_list()
+    coursewarelist = download.get_download_courseware_list()
+    list_len = len(speedlist)
     
-    item = -1
+    flag = False
     i = 0
     while i < list_len:
-        if(u"下载完成" == list[i]):
-            item = i
+        if(u"下载完成" == speedlist[i]):
+            coursewarelist[i].click()
+            time.sleep(15)
+            driver.press_keycode(4)
+            flag = True
             break
         i = i + 1
-        
-
-    coursewarelist = download.get_download_courseware_list()
-    coursewarelist[item].click()
-    
-    time.sleep(15)
-        
-    driver.press_keycode(4)
-    #return item
+    return flag

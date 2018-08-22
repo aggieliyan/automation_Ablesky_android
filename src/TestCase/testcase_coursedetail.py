@@ -88,6 +88,10 @@ class CourseDetailTest(unittest.TestCase):
         personal.click_my_download()
         flag = download.course_add_download_page_success(self.driver, self.cfg, courseTitle)
         self.assertTrue(flag, u'课程添加下载失败')
+        while True:
+            flag = download.play_the_download_finish_courseware(self.driver, self.cfg)
+            if flag:
+                break
         download.click_back_btn(self.driver, self.cfg)
         
     @unittest.skip("test")   
