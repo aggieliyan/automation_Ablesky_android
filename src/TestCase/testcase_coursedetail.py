@@ -72,7 +72,8 @@ class CourseDetailTest(unittest.TestCase):
         play.play_video_and_exist(self.driver, self.cfg)
         self.driver.press_keycode(4)
         mycourse.click_back_btn(self.driver, self.cfg)
-        
+    
+    @unittest.skip("test")    
     def test_download_all_coursewares(self):
         print u"开始测试下载课件..."
         personal = Personal(self.driver, self.cfg)
@@ -94,10 +95,13 @@ class CourseDetailTest(unittest.TestCase):
                 break
         download.click_back_btn(self.driver, self.cfg)
         
-    @unittest.skip("test")   
-    def test_course_detail(self): 
-        personal = Personal(self.driver, self.cfg)
-        personal.click_my_course()
+       
+    def test_course_detail_and_download(self):
+        print u"测试详情页相关内容、播放、下载等..."
+        personal = Personal(self.driver, self.cfg)      
+        personal.click_my_download()
+        download.clear_download_list(self.driver, self.cfg)
+        personal.click_my_course()        
         mycourse.click_my_course_page_dianbo_list_item(self.driver, self.cfg)
         coursedetail.click_first_tab(self.driver, self.cfg)
         base = Base(self.driver)
@@ -142,8 +146,28 @@ class CourseDetailTest(unittest.TestCase):
             self.assertTrue(flag, u"点击底部推荐课程错误")
         except:
             print u"课程详情没有推荐课程"
-        coursedetail.click_back_btn(self.driver, self.cfg)    
+        coursedetail.click_back_btn(self.driver, self.cfg)
+        
+        print u"开始测试播放单视频..."
+        mycourse.search_course_and_open_the_course_detail(self.driver, self.cfg)
+        coursedetail.click_second_tab(self.driver, self.cfg)
+        coursedetail.play_courseware(self.driver, self.cfg,0)
+        play.play_video_and_exist(self.driver, self.cfg)
+        
+        print u"开始测试下载课件..."
+        coursedetail.download_all_courseware(self.driver, self.cfg)
+        courseTitle = coursedetail.get_course_title(self.driver, self.cfg, "dianbo")
+        print u'---关闭课程详情页，打开下载页面'
+        self.driver.press_keycode(4)
         mycourse.click_back_btn(self.driver, self.cfg)
+        personal.click_my_download()
+        flag = download.course_add_download_page_success(self.driver, self.cfg, courseTitle)
+        self.assertTrue(flag, u'课程添加下载失败')
+        while True:
+            flag = download.play_the_download_finish_courseware(self.driver, self.cfg)
+            if flag:
+                break
+        download.click_back_btn(self.driver, self.cfg)
         
         
         

@@ -62,6 +62,7 @@ def login_by_username(cfg, driver, username_num, username_pwd):
     driver.press_keycode(4)
     time.sleep(1)
     loginpage.click_login_btn()
+    time.sleep(2)
     print u'---用户名登录成功'
     time.sleep(2)   
     try:
