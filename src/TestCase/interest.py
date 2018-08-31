@@ -39,6 +39,8 @@ def get_title(driver, cfg):
     interest = Interest(driver, cfg)
     return interest.get_page_title()
 
+
+#随机选择兴趣
 def choose_interest(driver,cfg):
     interest = Interest(driver, cfg)
     list = interest.get_interests()

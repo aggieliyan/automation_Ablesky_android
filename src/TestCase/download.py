@@ -10,7 +10,11 @@ import time
 def click_back_btn(driver,cfg):
     download = DownloadPage(driver,cfg)
     download.click_back_btn()
+
     
+'''
+清空下载列表
+'''    
 def clear_download_list(driver,cfg):
     download = DownloadPage(driver,cfg)
     try:
@@ -26,7 +30,10 @@ def clear_download_list(driver,cfg):
     finally:
         download.click_back_btn()
         
-
+    
+'''
+验证课件是否添加下载成功
+'''
 def course_add_download_page_success(driver,cfg,courseTitle):
     download = DownloadPage(driver,cfg)
     list = download.get_all_download_course_title_list()
@@ -50,10 +57,15 @@ def course_add_download_page_success(driver,cfg,courseTitle):
         return 0
     '''
 
-
+    
+'''
+点击播放下载完成的课件
+'''
 def play_the_download_finish_courseware(driver,cfg):
     download = DownloadPage(driver,cfg)
+    #获取课件下载进度列表
     speedlist = download.get_all_download_courseware_current_speed_list()
+    #获取课件列表
     coursewarelist = download.get_download_courseware_list()
     list_len = len(speedlist)
     

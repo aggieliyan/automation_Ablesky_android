@@ -152,6 +152,10 @@ def testOperateWithoutLogin(self,driver,cfg):
     except Exception,e:
         print e
 
+    
+'''
+测试我的收藏页面相关内容：详情页取消收藏，长按取消收藏，清空收藏列表
+'''
 def testMyCollectPage(self,driver,cfg):
     index = Index(driver, cfg)
     index.click_tab_myself_btn()
@@ -179,7 +183,10 @@ def testMyCollectPage(self,driver,cfg):
     mycollect.click_back_btn(driver, cfg)
         
 
-
+    
+'''
+测试我的课程相关内容
+'''
 def testMyCoursePage(self,driver,cfg):
     index = Index(driver, cfg)
     index.click_tab_myself_btn()

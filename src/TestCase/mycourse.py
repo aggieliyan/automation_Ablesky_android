@@ -114,7 +114,9 @@ def click_my_course_page_dianbo_list_item(driver,cfg):
     else:
         return False
 
-
+'''
+筛选预售班并点击进入课程详情页
+''' 
 def click_my_course_page_presell_list_item(driver,cfg):
     print u"---切换到点播"
     mycourse = switch_to_dianbo_page(driver, cfg)
@@ -140,6 +142,9 @@ def click_my_course_page_presell_list_item(driver,cfg):
     else:
         return False
 
+'''
+筛选网络班并点击进入课程详情页
+''' 
 def click_my_course_page_network_list_item(driver,cfg):
     print u"---切换到点播"
     mycourse = switch_to_dianbo_page(driver, cfg)
@@ -166,6 +171,9 @@ def click_my_course_page_network_list_item(driver,cfg):
         return False
     
 
+'''
+点击直播课程进入详情页
+''' 
 def click_my_course_page_live_list_item(driver,cfg):
     print u"---切换到直播"
     mycourse = switch_to_live_page(driver, cfg)
@@ -186,6 +194,9 @@ def click_my_course_page_live_list_item(driver,cfg):
     else:
         return False
 
+'''
+点击面授班进入课程详情页
+''' 
 def click_my_course_page_face_list_item(driver,cfg):
     print u"---切换到面授班"
     mycourse = switch_to_faceCourse_page(driver, cfg)
@@ -206,7 +217,9 @@ def click_my_course_page_face_list_item(driver,cfg):
     else:
         return False
     
-
+'''
+筛选考试卷并点击进入开始答题页
+''' 
 def click_my_course_page_examination_item(driver,cfg):
     print u"---切换到考试练习"
     mycourse = switch_to_exam_page(driver, cfg)
@@ -232,7 +245,10 @@ def click_my_course_page_examination_item(driver,cfg):
     else:
         return False
     
-
+    
+'''
+筛选练习卷并点击进入开始答题页
+'''
 def click_my_course_page_exercise_item(driver,cfg):
     print u"---切换到考试练习"
     mycourse = switch_to_exam_page(driver, cfg)
@@ -258,7 +274,10 @@ def click_my_course_page_exercise_item(driver,cfg):
     else:
         return False
 
-
+    
+'''
+筛选题库并点击进入开始答题页
+'''
 def click_my_course_page_question_bank_item(driver,cfg):
     print u"---切换到考试练习"
     mycourse = switch_to_exam_page(driver, cfg)

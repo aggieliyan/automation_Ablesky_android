@@ -13,7 +13,10 @@ def click_back_btn(driver, cfg):
     mycollect = MyCollectPage(driver, cfg)
     mycollect.click_back_btn()
 
- 
+
+'''
+清空我的收藏列表
+''' 
 def click_sure_btn_after_open_clear_dlg(driver, cfg):
     time.sleep(2)
     mycollect = MyCollectPage(driver, cfg)
