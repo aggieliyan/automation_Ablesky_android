@@ -14,6 +14,10 @@ set_baidu_ime = "adb shell ime set com.baidu.input_bbk.service/.PinyinIME"
 def input_method_appium(ime):
     os.system(ime)
 
+'''
+搜索课程并打开该课程详情页
+目前输入搜索关键字之后，因为页面没有搜索按钮，所以想要通过点击回车键或者搜索键实现，但是未执行，搜索功能还未实现
+'''
 def search_course_and_open_the_course_detail(driver,cfg):
     mycourse = MyCourse(driver, cfg)
     '''mycourse.click_search_btn()
@@ -29,7 +33,6 @@ def search_course_and_open_the_course_detail(driver,cfg):
     '''
     mycourse.click_search_btn()
     mycourse.input_search_key("pdf")
-    #KEYCODE_ENTER--回车键---66
     driver.press_keycode(83)
     '''
     
@@ -77,12 +80,15 @@ def open_dianbo_course_detail(driver,cfg):
     except Exception,e:
         print e
         
-    
+'''
+筛选点播课并点击进入课程详情页
+'''    
 def click_my_course_page_dianbo_list_item(driver,cfg):
     print u"---切换到点播"
     mycourse = switch_to_dianbo_page(driver, cfg)
     time.sleep(2)
     print u"---选择点播课"
+    #点击筛选-选择点播课-点击确定按钮
     mycourse.click_filter_btn()
     mycourse.choose_dianbo_course()
     mycourse.click_filter_confirm_btn()
@@ -95,6 +101,11 @@ def click_my_course_page_dianbo_list_item(driver,cfg):
     if courselist:
         print u"---打开点播课详情页"
         mycourse.click_course_list_item(courselist,0)
+        try:
+            print u"---若有引导页，关闭，而且pass"
+            coursedetail.close_page_hint_view(driver, cfg)
+        except:
+            pass
         title = coursedetail.get_course_title(driver, cfg,'dianbo')
         if title == playCourseTitle:
             return True

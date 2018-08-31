@@ -189,8 +189,8 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>My unit test</h1>
-<p class='attribute'><strong>Start Time:</strong> 2018-08-14 16:55:41</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:33.441000</p>
+<p class='attribute'><strong>Start Time:</strong> 2018-08-29 11:23:28</p>
+<p class='attribute'><strong>Duration:</strong> 0:01:07.792000</p>
 <p class='attribute'><strong>Status:</strong> Error 1</p>
 
 <p class='description'>This demonstrates the report output by HTMLTestRunner.</p>
@@ -222,7 +222,7 @@ function showOutput(id, name) {
 </tr>
 
 <tr class='errorClass'>
-    <td>CourseDetailTest</td>
+    <td>AllTestCaseTest</td>
     <td>1</td>
     <td>0</td>
     <td>0</td>
@@ -231,7 +231,7 @@ function showOutput(id, name) {
 </tr>
 
 <tr id='ft1.1' class='none'>
-    <td class='errorCase'><div class='testcase'>test_open_course_detail_by_click_bottom_recommend_course</div></td>
+    <td class='errorCase'><div class='testcase'>testOperateWithoutLogin</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -245,23 +245,38 @@ function showOutput(id, name) {
         </div>
         <pre>
         
-ft1.1: 首页有广告关闭广告后进入个人中心,否则pass
+ft1.1: ---是否有启动页，若有点击立即体验，否则pass
+---首页有广告关闭广告后进入个人中心,否则pass
+---若弹出评分对话框，关闭，否则pass
+---检查是否已登录
+切换到首页
+切换到能力圈
+切换到会员频道
+切换到交流
+切换到我的
+未登录情况下点击我的课程
+未登录情况下点击我的收藏
+未登录情况下点击关注网校
+未登录情况下点击我的下载
+未登录情况下点击优惠券
+未登录情况下点击会员
+未登录情况下点击账户余额
+未登录情况下点击推荐有奖
+未登录情况下点击分享收益
 Traceback (most recent call last):
-  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\testcase_coursedetail.py", line 55, in setUp
-    login.login_by_username(self.cfg, self.driver, self.username_num, self.username_pwd)
-  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\login.py", line 51, in login_by_username
-    open_login_page(driver,cfg)
-  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\login.py", line 28, in open_login_page
-    index.click_tab_myself_btn()
-  File "E:\workspace\GitHub\automation_Ablesky_android\src\PO\index_page.py", line 35, in click_tab_myself_btn
-    self.cfg.get('index_page', 'tab_myself_btn')).click()
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\testcase_all.py", line 78, in tearDown
+    login.logout_by_exit_btn(self.driver, self.cfg)
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\TestCase\login.py", line 109, in logout_by_exit_btn
+    settingpage.click_logout_btn()
+  File "E:\workspace\GitHub\automation_Ablesky_android\src\PO\setting_page.py", line 33, in click_logout_btn
+    self.cfg.get('setting_page', 'setting_page_logout_btn')).click()
   File "E:\Program Files\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 832, in find_element
     'value': value})['value']
   File "E:\Program Files\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 297, in execute
     self.error_handler.check_response(response)
   File "E:\Program Files\python\lib\site-packages\appium\webdriver\errorhandler.py", line 29, in check_response
     raise wde
-WebDriverException: Message: An unknown server-side error occurred while processing the command.
+NoSuchElementException: Message: An element could not be located on the page using the given search parameters.
 
 
 

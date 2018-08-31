@@ -21,6 +21,7 @@ def clear_download_list(driver,cfg):
             download.click_delete_btn()
             download.click_delete_sure_btn()
     except:
+        time.sleep(2)
         pass
     finally:
         download.click_back_btn()

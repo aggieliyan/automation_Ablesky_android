@@ -12,6 +12,8 @@ class Home(Base):
     def __init__(self, driver, cfg):
         self.dr = driver
         self.cfg = cfg
+        #ctxlist = self.dr.contexts
+        #print ctxlist
         
     
     #关闭首页悬浮广告  
@@ -59,4 +61,9 @@ class Home(Base):
     def click_startup_homepage_skip_btn(self):
         element = self.dr.find_element(self.cfg.get('home_page', 'home_page_startup_skip_by'), \
                               self.cfg.get('home_page', 'home_page_startup_skip'))
+        element.click()
+        
+    def allow_permission(self):
+        element = self.dr.find_element(self.cfg.get('home_page', 'home_page_permission_allow_by'), \
+                              self.cfg.get('home_page', 'home_page_permission_allow'))
         element.click()

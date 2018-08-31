@@ -186,3 +186,24 @@ class CourseDetailPage(Base):
         titlesList = self.dr.find_elements(self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_item_title_by'), \
                               self.cfg.get('course_detail_page', 'course_detail_bottom_recommend_list_item_title'))
         return titlesList
+    
+    def click_page_first_hint_vew(self):
+        time.sleep(2)
+        element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_first_hint_view_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_first_hint_view'))
+        element.click()
+    
+    
+    def click_play_first_hint_vew(self):
+        time.sleep(2)
+        element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_play_first_hint_view_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_play_first_hint_view'))
+        element.click()
+    
+    
+    def click_play_second_hint_vew(self):
+        time.sleep(2)
+        element = self.dr.find_element(self.cfg.get('course_detail_page', 'course_detail_play_second_hint_view_by'), \
+                              self.cfg.get('course_detail_page', 'course_detail_play_second_hint_view'))
+        element.click()
+    

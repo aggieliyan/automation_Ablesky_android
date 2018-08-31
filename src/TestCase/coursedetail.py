@@ -18,15 +18,23 @@ from PO.base import Base
 
 import searchresult
 
-
+'''
+点击返回按钮
+'''
 def click_back_btn(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_back_btn()
 
+'''
+点击中屏播放时的返回按钮
+'''
 def click_video_box_back_btn(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_video_box_back_btn()
 
+'''
+判断该课程是否收藏，已收藏返回True，未收藏返回False
+'''
 def if_collect_course(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     collectedtext = coursedetail.get_collect_icon_text()
@@ -35,24 +43,37 @@ def if_collect_course(driver,cfg):
     else:
         return True
 
-    
+'''
+点击收藏按钮
+'''    
 def click_collect_icon(driver,cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_collect_icon()
 
-
+'''
+切换到详情tab
+''' 
 def click_first_tab(driver, cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_first_tab()
 
+'''
+切换到目录tab
+'''
 def click_second_tab(driver, cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_second_tab()
- 
+
+'''
+切换到提问tab
+''' 
 def click_third_tab(driver, cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_third_tab()
 
+'''
+切换到相关tab
+'''
 def click_four_tab(driver, cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     coursedetail.click_four_tab()
@@ -60,7 +81,9 @@ def click_four_tab(driver, cfg):
 def click_first_courseware(driver, cfg):
     coursedetail = CourseDetailPage(driver,cfg)
     
+    #获取课件列表
     list = coursedetail.get_courseware_list()
+    #获取列表长度
     len = coursedetail.get_courseware_list_length(list)
     coursedetail.click_first_courseware_and_back_my_course(list,len)
     
@@ -91,6 +114,7 @@ def open_teacher_info(driver,cfg,index):
     teacherList[index].click()
     teacher = Teacher(driver,cfg)
     base = Base(driver)
+    #切换到webview模式，否则不能对wap页的元素进行操作
     base.switchToWebview()
     teacherAndOrgName = teacher.get_teacher_name()
     #teacher.click_back_btn()
@@ -106,6 +130,7 @@ def open_org_info(driver,cfg):
     coursedetail.click_org_info()
     school = SchoolHome(driver,cfg)
     base = Base(driver)
+    #切换到webview模式，否则不能对wap页的元素进行操作
     base.switchToWebview()
     orgNameInSchoolHome = school.get_org_title()
     if orgname == orgNameInSchoolHome:
@@ -130,8 +155,10 @@ def open_course_tag(driver,cfg):
     
 def click_bottom_recommend_course(driver,cfg,item):
     coursedetail = CourseDetailPage(driver,cfg)
+    #获取底部推荐课程列表
     courseList = coursedetail.get_bottom_recommend_list()
     title = coursedetail.get_bottom_recommend_list_item_title()[item].text
+    #有的课程名称较长，显示名称...，所以校验名称是否一致时需要去掉...
     if '...' in title:
         title = title[:-3]
     print u"---点击第",item+1,u"个推荐课程"
@@ -149,15 +176,46 @@ def click_video_box(driver,cfg):
     
 def play_courseware(driver,cfg,index):
     coursedetail = CourseDetailPage(driver,cfg)
+    #获取课件列表
     coursewarelist = coursedetail.get_courseware_list()
-    #length = len(coursewarelist)
     print u"---点击课件播放"
     coursewarelist[index].click()
+    
+    '''
+          通过id定位不到引导页，所以先这样做，以后又更好方法再修改
+    '''
+    #获取手机屏幕分辨率
+    x = driver.get_window_size()['width']
+    y = driver.get_window_size()['height']
+    #关闭播放引导页
+    driver.tap([(x/4,y/6)],200)
+    driver.tap([(x/4,y/6)],200)
+    '''
+    try:
+        print u"---若有播放引导页，关闭，而且pass"
+        coursedetail.close_play_hint_view(driver,cfg)
+    except:
+        print 'no found hint view,pass'
+        pass
+    '''
     time.sleep(10)
+    #点击中屏播放器，唤出大屏按钮等
     click_video_box(driver,cfg)
     #driver.tap([(0,0),(1080,607)],500)
     print u"---全屏播放"
     coursedetail.click_full_screen_btn()
+    
+def close_page_hint_view(driver,cfg):
+    coursedetail = CourseDetailPage(driver,cfg)
+    coursedetail.click_page_first_hint_vew()
+    
+def close_play_hint_view(driver,cfg):
+    print 11111111111111111
+    coursedetail = CourseDetailPage(driver,cfg)
+    coursedetail.click_play_first_hint_vew()
+    time.sleep(1)
+    coursedetail.click_play_second_hint_vew()
+    
     
     
 '''

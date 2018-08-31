@@ -18,12 +18,16 @@ def get_login_page_title(driver,cfg):
     title = loginpage.get_page_title()
     return title
 
-def open_login_page(driver,cfg):
+def iflogin(driver,cfg):
     home.enter_home_page(driver, cfg)
     index = Index(driver,cfg)
     index.click_tab_myself_btn()
     print u'---检查是否已登录'
     username = personal.get_username_text(driver, cfg)
+    return username
+
+def open_login_page(driver,cfg):
+    username = iflogin(driver, cfg)
     if '登录/注册' != username:
         print u"---退出登录"
         logout_by_exit_btn(driver,cfg)
@@ -42,6 +46,7 @@ def login_by_mobile(cfg, driver, mobile_num, mobile_pwd):
     print u'---手机号登录成功'
     loginpage.click_login_btn()
     time.sleep(2)
+    #如果弹出修改兴趣页面，先关闭页面 
     try:
         title = interest.get_title(driver, cfg)
         print title
@@ -64,7 +69,8 @@ def login_by_username(cfg, driver, username_num, username_pwd):
     loginpage.click_login_btn()
     time.sleep(2)
     print u'---用户名登录成功'
-    time.sleep(2)   
+    time.sleep(2)
+    #如果弹出修改兴趣页面，先关闭页面 
     try:
         title = interest.get_title(driver, cfg)
         print title
@@ -87,6 +93,7 @@ def login_by_email(cfg, driver, email_num, email_pwd):
     loginpage.click_login_btn()
     print u'---邮箱登录成功'
     time.sleep(2)
+    #如果弹出修改兴趣页面，先关闭页面 
     try:
         title = interest.get_title(driver, cfg)
         print title

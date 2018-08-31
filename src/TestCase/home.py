@@ -21,10 +21,14 @@ def close_the_give_mark_dlg_by_click_cancel_btn(driver,cfg):
     homepage = Home(driver,cfg)
     homepage.click_the_give_mark_dlg_cancel_btn()
     
-def isHomePage(driver,cfg):
+def allow_permission(driver,cfg):
     homepage = Home(driver,cfg)
+    homepage.allow_permission()
+    
+def isHomePage(driver,cfg):
     base = Base(driver)
     base.switchToWebview()
+    homepage = Home(driver,cfg)
     text = homepage.get_search_box_text()
     if u"搜索课程机构" == text:
         return True
@@ -55,6 +59,12 @@ def click_startup_skip_btn(driver,cfg):
         homepage.click_startup_homepage_skip_btn() 
     
 def enter_home_page(driver,cfg):
+    try:
+        print u'---是否有权限选择，若有点击允许，否则pass'
+        allow_permission(driver, cfg)
+    except:
+        pass
+    
     try:
         print u'---是否有启动页，若有点击立即体验，否则pass'
         click_startup_skip_btn(driver, cfg)
